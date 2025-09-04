@@ -89,19 +89,28 @@ Vue.js вирізняється поєднанням простоти та по�
    ```
 5. Знайдіть компонент HelloWorld.vue та додайте інформацію про себе (Спеціальність, курс, група, ПІБ).
 6. Створіть `Dockerfile` для збірки та запуску Vue.js додатку.
-   ```DOCKERFILE
-      # Build stage
-      FROM node:latest as build-stage
-      WORKDIR /app
-      COPY package*.json ./
-      RUN npm install
-      COPY . .
-      RUN npm run build
-      # Production stage
-      FROM nginx:stable-alpine as production-stage
-      COPY --from=build-stage /app/dist /usr/share/nginx/html
-      CMD ["nginx", "-g", "daemon off;"]
-      EXPOSE 80      
+    ```DOCKERFILE
+   # Build stage: використовуємо офіційний образ Node.js для збірки Vue додатку
+   FROM node:latest as build-stage
+   # Встановлюємо робочу директорію всередині контейнера
+   WORKDIR /app
+   # Копіюємо тільки package.json та package-lock.json для кешування npm install
+   COPY package*.json ./
+   # Встановлюємо залежності
+   RUN npm install
+   # Копіюємо весь код проекту у контейнер
+   COPY . .
+   # Збираємо production-версію Vue додатку
+   RUN npm run build
+   
+   # Production stage: використовуємо легкий Nginx для сервінгу статичних файлів
+   FROM nginx:stable-alpine as production-stage
+   # Копіюємо збірку з build-stage у Nginx
+   COPY --from=build-stage /app/dist /usr/share/nginx/html
+   # Відкриваємо порт 80 для доступу до веб-додатку
+   EXPOSE 80
+   # Команда для запуску Nginx у foreground (обов'язково для Docker)
+   CMD ["nginx", "-g", "daemon off;"]
    ```
 7. Додайте `.dockerignore` для виключення непотрібних файлів:
 
@@ -126,10 +135,8 @@ Vue.js вирізняється поєднанням простоти та по�
 10. Додайте до package.json наступні команди:
    ```json
       "scripts": {
-        ...
         "docker-run": "docker-compose up -d --build",
         "docker-stop": "docker-compose down",
-        ...
       }
    ```
 11. Протестуйте роботу додатку та зупиныьте його за допомогою команд:
