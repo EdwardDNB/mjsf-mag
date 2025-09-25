@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vue-lab-2-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vue-lab-router" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/zo-ex-1" vcs="Git" />
+  </component>
+</project>

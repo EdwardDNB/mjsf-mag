@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  webserver:
+    image: nginx:1.17.4-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./certbot-etc:/etc/letsencrypt
+      - ./webroot:/var/www/html
+    networks:
+      - external
+  certbot:
+    depends_on:
+      - webserver
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - ./webroot:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html --email sammy@vue-labs.local --agree-tos --no-eff-email --staging -d vue-labs.local -d www.vue-labs.local -v
+networks:
+  external:
+    driver: bridge
+  internal:
+    driver: bridge
+volumes:
+  certbot-etc:
+  webroot:
+
+

@@ -1,0 +1,12 @@
+flowchart TD
+    App["App.vue </br> (props: images)"] --> |props: images| Gallery["Gallery.vue"]
+
+    Gallery --> GI["GalleryItem.vue  </br> (props: src, emit: select)"]
+    Gallery --> GM["GalleryModal.vue </br> (props: src, emit: close)"]
+
+    GI -->|emit select| Gallery
+    Gallery -->|selected img → props: src| GM
+    GM -->|emit close| Gallery
+
+    classDef comp fill:#fff,stroke:#111,stroke-width:1px,rx:6,ry:6;
+    class App,Gallery,GI,GM comp;
