@@ -6,6 +6,7 @@ import type { StepItem } from "./types"
 const props = withDefaults(defineProps<StepItem>(),   {
   title: '',
   slug: '',
+  disabled: false,
 })
 
 const stepper = inject(StepperKey)
@@ -16,7 +17,8 @@ if (!stepper) {
 onMounted(() => {
   stepper.registerStep({
     title: props.title,
-    slug: props.slug
+    slug: props.slug,
+    disabled: props.disabled,
   } as StepItem)
 })
 
