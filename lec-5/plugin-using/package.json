@@ -12,7 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@munspel/upload-preview-input": "^1.0.0",
+    "@munspel/upload-preview-input": "^1.0.3",
     "vue": "^3.5.22"
   },
   "devDependencies": {

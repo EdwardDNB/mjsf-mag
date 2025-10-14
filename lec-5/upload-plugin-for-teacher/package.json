@@ -1,7 +1,7 @@
 {
   "name": "@munspel/upload-preview-input",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vue 3 компонент для попереднього перегляду зображень перед завантаженням",
   "main": "dist/upload-preview-input.js",
   "module": "dist/upload-preview-input.es.js",
