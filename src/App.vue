@@ -1,48 +1,37 @@
-<script setup>
-import { ref } from "vue";
-import Button from "./components/Button.vue";
-import SearchableDropdown from "./components/SearchableDropdown.vue";
-import TabsDemo from "./components/TabsDemo.vue";
+<script setup lang="ts">
+import { useBreakpoints } from './composables/useBreakpoints'
 
-// для кнопки
-const colors = ["red", "blue", "green", "yellow"];
-const selectedColor = ref("blue");
-
-// для списку
-const cities = ["Київ", "Львів", "Одеса", "Харків", "Дніпро"];
-const selectedCity = ref("");
+const {
+  width,
+  isMobile,
+  isTablet,
+  isDesktop,
+  greater,
+  smaller,
+  between
+} = useBreakpoints({
+  mobile: 640,
+  tablet: 960,
+  desktop: 1280
+})
 </script>
 
 <template>
-  <div class="p-6 space-y-10 bg-gray-50 min-h-screen">
-    <h1 class="text-3xl font-bold text-center">Lab 2 – Компоненти Vue + Tailwind</h1>
+  <div class="p-6 max-w-xl mx-auto bg-gray-100 rounded-2xl shadow-md text-center mt-10">
+    <h2 class="text-xl font-semibold mb-4">📱 Перевірка брейкпоінтів</h2>
 
-    <!-- 🔹 Демо кнопки -->
-    <section class="bg-white p-6 rounded-xl shadow">
-      <h2 class="text-xl font-semibold mb-4">Кнопка зі зміною кольору</h2>
+    <p class="mb-2">📏 Поточна ширина: <b>{{ width }}</b> px</p>
 
-      <SearchableDropdown :items="colors" placeholder="Виберіть колір кнопки"
-        @update:modelValue="selectedColor = $event" />
+    <p v-if="isMobile" class="text-blue-600 font-semibold">Мобільний пристрій</p>
+    <p v-else-if="isTablet" class="text-green-600 font-semibold">Планшет</p>
+    <p v-else-if="isDesktop" class="text-purple-600 font-semibold">Десктоп</p>
 
-      <div class="mt-4">
-        <Button label="Я міняю колір" :color="selectedColor" size="medium"
-          @click="alert('Кнопка кольору: ' + selectedColor)" />
-      </div>
-    </section>
+    <hr class="my-4 border-gray-300" />
 
-    <!-- 🔹 Демо випадаючого списку -->
-    <section class="bg-white p-6 rounded-xl shadow">
-      <h2 class="text-xl font-semibold mb-4">Вибір міста</h2>
-      <SearchableDropdown :items="cities" placeholder="Оберіть місто" @update:modelValue="selectedCity = $event" />
-
-      <p v-if="selectedCity" class="mt-3 text-lg">
-        Ви обрали: <span class="font-semibold">{{ selectedCity }}</span>
-      </p>
-    </section>
-
-    <!-- 🔹 Демо вкладок -->
-    <section class="bg-white p-6 rounded-xl shadow">
-      <TabsDemo />
-    </section>
+    <div class="space-y-2 text-left">
+      <p>greater("tablet") → {{ greater("tablet").value }}</p>
+      <p>smaller("desktop") → {{ smaller("desktop").value }}</p>
+      <p>between("mobile","desktop") → {{ between("mobile", "desktop").value }}</p>
+    </div>
   </div>
 </template>
