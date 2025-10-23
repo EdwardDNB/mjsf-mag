@@ -2,6 +2,8 @@
 import type {ModalProps} from "@/Modal/types.ts";
 
 const props = withDefaults(defineProps<ModalProps>(), {
+  message: "",
+  modelValue: false,
   cancelText: "Скасувати",
   confirmText: "Підтвердити",
 });
@@ -82,5 +84,4 @@ const confirm = () => {
 .fade-leave-to {
   opacity: 0;
 }
-
 </style>

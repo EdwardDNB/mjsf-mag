@@ -10,7 +10,7 @@ withDefaults(defineProps<GalleryItemProps>(), {
   configurable: false,
   viewable: false,
 })
-const showToolbar = ref(true)
+const showToolbar = ref(false)
 const emits = defineEmits(['edit', 'remove', 'configure', 'view'])
 </script>
 
@@ -101,8 +101,6 @@ const emits = defineEmits(['edit', 'remove', 'configure', 'view'])
     &--view {
       background-image: url("@/assets/images/view.svg");
     }
-
-
   }
 }
 

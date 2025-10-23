@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import LoginPage from "@/pages/LoginPage.vue";
 import RecipesListPage from "@/pages/RecipesListPage.vue";

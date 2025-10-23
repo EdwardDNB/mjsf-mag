@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, defineEmits, defineProps, ref} from 'vue'
+import {computed, defineEmits, defineProps, onMounted, ref} from 'vue'
 import type {PreviewImage} from "@/components/types.ts";
 
 const props = defineProps<{ modelValue?: File[], maxFiles?: number }>()
@@ -9,8 +9,10 @@ const emit = defineEmits<{ (e: 'update:modelValue', value: File[]): void }>()
 const previews = ref<PreviewImage[]>([])
 
 const handleFiles = (files: FileList | null) => {
+  console.log(files);
   if (!files) return
   const newFiles = Array.from(files)
+  console.log(newFiles);
   const totalFiles = props.maxFiles
       ? previews.value.length + newFiles.length <= props.maxFiles
           ? newFiles
@@ -20,6 +22,7 @@ const handleFiles = (files: FileList | null) => {
   newFiles.forEach((file) => {
     if (file.type.startsWith('image/')) {
       const url = URL.createObjectURL(file)
+      console.log(url);
       previews.value.push({file, url})
     }
   })
@@ -44,6 +47,12 @@ const openDialog = () => {
 }
 const isMaxReached = computed(() => {
   return props.maxFiles ? previews.value.length >= props.maxFiles : false
+})
+onMounted(()=>{
+  if (fileInput.value) {
+    console.log(fileInput.value);
+  }
+
 })
 </script>
 
@@ -127,7 +136,7 @@ const isMaxReached = computed(() => {
   }
 
   &__button {
-    display: none;
+   display: none;
   }
 
   &__image {

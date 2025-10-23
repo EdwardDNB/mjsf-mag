@@ -14,7 +14,7 @@ const imageFactory = (count: number): ImageItem[] => {
   }
   return res
 }
-const images = imageFactory(10)
+const images = imageFactory(8)
 </script>
 
 <template>

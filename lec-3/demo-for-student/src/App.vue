@@ -10,7 +10,7 @@ const onConfirm = () => {
 </script>
 <template>
   <div class="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4 max-w-7xl mx-auto">
-    <h1 class="text-xl font-bold pb-5">Stepper header</h1>
+    <h1 class="text-xl font-bold pb-5">Використання slots</h1>
     <button
       class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
       @click="showModal = true"
@@ -22,8 +22,12 @@ const onConfirm = () => {
       title="Підтвердження"
       message="Ви впевнені, що хочете виконати цю дію?"
       @confirm="onConfirm"
+
     >
-      Ваш контент!
+      <template #default="slotData">
+        Увага! {{slotData.defaultMessege }}
+        <button>Hello!</button>
+      </template>
 
       <template #header >
         Нова назва!

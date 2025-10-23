@@ -3,6 +3,7 @@ import {provide, ref} from "vue";
 import Stepper from "@/components/Stepper/Stepper.vue";
 import Step from "@/components/Stepper/Step.vue";
 import {useLocalStorage} from "@/composebles/local-storage.ts";
+import Card from "@/Card.vue";
 const caption = ref("Test res value")
 provide("caption", caption)
 const {data} = useLocalStorage("stepper1","ste1")
@@ -17,7 +18,9 @@ const {data} = useLocalStorage("stepper1","ste1")
       <Step title="Шаг 3" slug="step3">Контент шага 3</Step>
       <Step title="Шаг 4" slug="step4">Контент шага 2</Step>
       <Step title="Шаг 5" slug="step5">Контент шага 2</Step>
+      <Step title="Шаг 6" slug="step6">Контент шага 2</Step>
     </Stepper>
+    <Card/>
   </div>
 </template>
 
