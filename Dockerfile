@@ -8,8 +8,9 @@ COPY package*.json ./
 RUN npm install
 # Копіюємо весь код проекту у контейнер
 COPY . .
-# Збираємо production-версію Vue додатку
-RUN npm run build
+# Збираємо production-версію Vue додаткуnpm run dev
+
+
 
 # Production stage: використовуємо легкий Nginx для сервінгу статичних файлів
 FROM nginx:stable-alpine as production-stage
