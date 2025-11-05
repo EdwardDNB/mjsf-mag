@@ -1,0 +1,25 @@
+{
+	"name": "rudenko-document-uploader",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"types": "types/DocumentUploader.d.ts",
+	"files": [
+		"dist",
+		"types",
+		"README.md"
+	],
+	"scripts": {
+		"build": "vite build",
+		"publish:npm": "npm publish --access public"
+	},
+	"author": "Едуард Руденко",
+	"license": "MIT",
+	"keywords": [
+		"vue3",
+		"component",
+		"uploader",
+		"dragdrop",
+		"typescript"
+	]
+}
