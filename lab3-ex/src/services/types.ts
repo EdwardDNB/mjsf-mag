@@ -13,5 +13,5 @@ export interface Updateable<T> {
 }
 
 export interface Deleteable<T> {
-    delete(id: number): Promise<T>;
+    delete(id: number): Promise<void>;
 }
